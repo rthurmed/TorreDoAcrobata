@@ -10,11 +10,13 @@ var velocity = Vector2()
 
 var walking = false
 var is_onground = false
+var is_onceiling = false
 var is_starting_jump = false
 var is_holding_jump = false
 
 func _physics_process(delta):
 	is_onground = is_on_floor()
+	is_onceiling = is_on_ceiling()
 	
 	process_input(delta)
 	process_movement(delta)
@@ -35,7 +37,7 @@ func process_input(delta):
 	if Input.is_action_just_released("jump"):
 		is_holding_jump = false
 	
-	movement.x = lerp(movement.x, 0.0, 0.1)
+	movement.x = lerp(movement.x, 0.0, 0.2)
 
 func process_movement(delta):
 	var speed = SPEED if is_onground else SPEED_ON_AIR
@@ -44,6 +46,9 @@ func process_movement(delta):
 	velocity.x = movement.x * delta * speed
 	
 	# Vertical movement
+	if is_onceiling:
+		is_holding_jump = false
+	
 	if is_onground and is_starting_jump:
 		$JumpMaxHoldTimer.start()
 		is_starting_jump = false

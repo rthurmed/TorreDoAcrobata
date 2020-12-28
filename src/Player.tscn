@@ -63,9 +63,8 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=10]
-radius = 7.55319
-height = 6.94246
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 6, 10 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -75,7 +74,7 @@ frames = SubResource( 2 )
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 0.899586 )
+position = Vector2( 0, 1.01216 )
 shape = SubResource( 10 )
 
 [node name="JumpMaxHoldTimer" type="Timer" parent="."]
