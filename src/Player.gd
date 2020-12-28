@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-const SPEED = 12000
-const SPEED_ON_AIR = 10000
+const SPEED = 10000
+const SPEED_ON_AIR = 8000
 const GRAVITY = 200
 const JUMP_POWER = -300
 
@@ -30,7 +30,7 @@ func process_input(delta):
 	if Input.is_action_pressed("ui_right"):
 		movement.x = 1
 	
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and is_onground:
 		is_starting_jump = true
 		is_holding_jump = true
 	
