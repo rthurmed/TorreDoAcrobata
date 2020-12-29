@@ -17,6 +17,10 @@ var is_holding_jump = false
 var is_able_to_jump = false
 
 var is_hability_walljump_enabled = true
+var is_hability_doublejump_enabled = true
+var max_n_jumps = 1
+
+var timesjumped = 0
 
 var is_onwall = false
 var wall_direction = 0
@@ -26,10 +30,14 @@ func _physics_process(delta):
 	is_onground = is_on_floor()
 	is_onceiling = is_on_ceiling()
 	
-	is_able_to_jump = is_onground
+	is_able_to_jump = is_onground or timesjumped < max_n_jumps
 	
 	if is_hability_walljump_enabled:
-		is_able_to_jump = is_onground or is_wall_sliding
+		is_able_to_jump = is_able_to_jump or is_wall_sliding
+	
+	if is_hability_doublejump_enabled:
+		# This can be dynamically changed to enable triple and quatruple jump
+		max_n_jumps = 2
 	
 	process_input(delta)
 	process_movement(delta)
@@ -66,12 +74,16 @@ func process_movement(delta):
 	velocity.x = movement.x * delta * speed
 	
 	# Vertical movement
+	if is_onground:
+		timesjumped = 0
+	
 	if is_onceiling:
 		is_holding_jump = false
 	
 	if is_able_to_jump and is_starting_jump:
 		$JumpMaxHoldTimer.start()
 		is_starting_jump = false
+		timesjumped += 1
 		velocity.y = JUMP_POWER
 	
 	if not is_onground:
@@ -79,6 +91,7 @@ func process_movement(delta):
 			velocity.y = lerp(velocity.y, 0, 5 * delta)
 		elif is_wall_sliding:
 			velocity.y = GRAVITY_SLIDE
+			timesjumped = 0
 		else:
 			velocity.y = GRAVITY
 	
