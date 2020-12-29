@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/blocks-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/bg.png" type="Texture" id=3]
 [ext_resource path="res://src/LargePlatform.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Platform.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Spinblade.tscn" type="PackedScene" id=6]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -108,11 +109,16 @@ position = Vector2( -34, -424 )
 [node name="LargePlatform5" parent="Navigation2D/LargePlatforms" instance=ExtResource( 4 )]
 position = Vector2( -189, -424 )
 
-[node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
+[node name="Spinblades" type="Node" parent="Navigation2D"]
+
+[node name="Spinblade" parent="Navigation2D/Spinblades" instance=ExtResource( 6 )]
+position = Vector2( -127, -265 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( -188, -26 )
 z_index = 4
 
-[node name="Camera2D" type="Camera2D" parent="KinematicBody2D"]
+[node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2( 0, -24.0205 )
 current = true
 limit_left = -320
@@ -136,3 +142,5 @@ motion_offset = Vector2( 0, -250 )
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
 texture = ExtResource( 3 )
+[connection signal="body_entered" from="Navigation2D/Spinblades/Spinblade" to="Navigation2D/Spinblades/Spinblade" method="_on_Spinblade_body_entered"]
+[connection signal="cause_damage" from="Navigation2D/Spinblades/Spinblade" to="Player" method="_on_Any_cause_damage"]

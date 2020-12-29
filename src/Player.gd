@@ -26,7 +26,17 @@ var is_onwall = false
 var wall_direction = 0
 var is_wall_sliding = false
 
+var is_taking_damage = false
+var is_imune_to_damage = false
+var is_alive = true
+
+var max_life = 2
+var life = 2
+
 func _physics_process(delta):
+	if not is_alive:
+		return
+	
 	is_onground = is_on_floor()
 	is_onceiling = is_on_ceiling()
 	
@@ -122,5 +132,33 @@ func process_animation(_delta):
 	
 	$AnimatedSprite.play(animate)
 
+func hit(amount = 1):
+	if is_imune_to_damage: return
+	
+	life -= amount
+	
+	if life <= 0:
+		is_alive = false
+		is_imune_to_damage = true
+		$AnimatedSprite.play("fall")
+		$AnimationPlayer.play("die")
+		$AfterDeathResetTimer.start()
+	else:
+		is_imune_to_damage = true
+		$AnimationPlayer.play("hit")
+		$AfterHitInvincibleTimer.start()
+
 func _on_JumpMaxHoldTimer_timeout():
 	is_holding_jump = false
+
+func _on_AfterHitInvincibleTimer_timeout():
+	$AnimationPlayer.stop(true)
+	is_imune_to_damage = false
+
+func _on_AfterDeathResetTimer_timeout():
+	# warning-ignore:return_value_discarded
+	get_tree().reload_current_scene()
+
+func _on_Any_cause_damage(_pos):
+	hit(1)
+	# TODO: Knockback?
