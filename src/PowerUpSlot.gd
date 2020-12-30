@@ -1,13 +1,5 @@
 extends TextureButton
 
-enum PowerUpEnum {
-	JUMP_PLUS_1 = 0,
-	JUMP_PLUS_2 = 1,
-	LIFE_PLUS_1 = 2,
-	LIFE_PLUS_2 = 3,
-	WALL_JUMP = 4
-}
-
 export (int) var slot_index = 0
 
 func _ready():
@@ -19,3 +11,5 @@ func set_indicators(show):
 	$SlotIndicator/SpriteKeyboard.visible = show
 	$SlotIndicator/SpriteController.visible = show
 
+func set_power_up(code):
+	$PowerUp.set_power_up_code(code)

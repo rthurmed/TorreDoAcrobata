@@ -20,6 +20,10 @@ func _ready():
 
 func set_power_up_code(code):
 	power_up_code = code
+	
+	# Slots with -1 as code need to be hidden
+	visible = code >= 0
+	
 	update_sprite()
 
 func update_sprite():

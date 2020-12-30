@@ -12,3 +12,7 @@ func set_key_indicators(show):
 	$SlotContainer/PowerUpSlot1.set_indicators(show)
 	$SlotContainer/PowerUpSlot2.set_indicators(show)
 	$SlotContainer/PowerUpSlot3.set_indicators(show)
+
+func set_power_ups(power_up_array: Array):
+	for slot in $SlotContainer.get_children():
+		slot.set_power_up(power_up_array[slot.slot_index])

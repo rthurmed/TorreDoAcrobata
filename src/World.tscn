@@ -106,10 +106,10 @@ position = Vector2( -23, -392 )
 position = Vector2( -37, -72 )
 
 [node name="LargePlatform2" parent="Navigation2D/LargePlatforms" instance=ExtResource( 4 )]
-position = Vector2( -161, -360 )
+position = Vector2( -161, -354 )
 
 [node name="LargePlatform3" parent="Navigation2D/LargePlatforms" instance=ExtResource( 4 )]
-position = Vector2( -64, -360 )
+position = Vector2( -64, -354 )
 
 [node name="LargePlatform4" parent="Navigation2D/LargePlatforms" instance=ExtResource( 4 )]
 position = Vector2( -34, -424 )
@@ -147,11 +147,18 @@ move_to = Vector2( 0, -64 )
 [node name="PowerUps" type="Node" parent="Navigation2D"]
 
 [node name="PowerUp1" parent="Navigation2D/PowerUps" instance=ExtResource( 9 )]
-position = Vector2( -151, -390 )
+position = Vector2( -151, -393 )
 
 [node name="PowerUp2" parent="Navigation2D/PowerUps" instance=ExtResource( 9 )]
-position = Vector2( -72, -389 )
+position = Vector2( -74, -393 )
 power_up_code = 4
+
+[node name="PowerUp3" parent="Navigation2D/PowerUps" instance=ExtResource( 9 )]
+position = Vector2( -151, -452 )
+power_up_code = 2
+
+[node name="PowerUp4" parent="Navigation2D/PowerUps" instance=ExtResource( 9 )]
+position = Vector2( -75, -452 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( -188, -26 )
@@ -191,3 +198,7 @@ texture = ExtResource( 3 )
 [connection signal="stop_interacting_with_holder" from="Navigation2D/PowerUps/PowerUp1" to="Player" method="_on_PowerUp_stop_interacting_with_holder"]
 [connection signal="interacting_with_holder" from="Navigation2D/PowerUps/PowerUp2" to="Player" method="_on_PowerUp_interacting_with_holder"]
 [connection signal="stop_interacting_with_holder" from="Navigation2D/PowerUps/PowerUp2" to="Player" method="_on_PowerUp_stop_interacting_with_holder"]
+[connection signal="interacting_with_holder" from="Navigation2D/PowerUps/PowerUp3" to="Player" method="_on_PowerUp_interacting_with_holder"]
+[connection signal="stop_interacting_with_holder" from="Navigation2D/PowerUps/PowerUp3" to="Player" method="_on_PowerUp_stop_interacting_with_holder"]
+[connection signal="interacting_with_holder" from="Navigation2D/PowerUps/PowerUp4" to="Player" method="_on_PowerUp_interacting_with_holder"]
+[connection signal="stop_interacting_with_holder" from="Navigation2D/PowerUps/PowerUp4" to="Player" method="_on_PowerUp_stop_interacting_with_holder"]

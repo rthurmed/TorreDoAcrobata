@@ -1,10 +1,20 @@
 extends KinematicBody2D
 
+enum PowerUpEnum {
+	JUMP_PLUS_1 = 0,
+	JUMP_PLUS_2 = 1,
+	LIFE_PLUS_1 = 2,
+	LIFE_PLUS_2 = 3,
+	WALL_JUMP = 4
+}
+
 const SPEED = 10000
 const SPEED_ON_AIR = 8000
 const GRAVITY = 200
 const GRAVITY_SLIDE = 50
 const JUMP_POWER = -300
+const LIFE_DEFAULT = 2
+const JUMP_DEFAULT_MAX_N = 1
 
 var movement = Vector2()
 var velocity = Vector2()
@@ -16,14 +26,13 @@ var is_starting_jump = false
 var is_holding_jump = false
 var is_able_to_jump = false
 
-var is_hability_walljump_enabled = true
-var is_hability_doublejump_enabled = true
+var is_hability_walljump_enabled = false
 
-var max_n_jumps = 1
+var max_n_jumps = JUMP_DEFAULT_MAX_N
 var timesjumped = 0
 
-var max_life = 2
-var life = 2
+var max_life = LIFE_DEFAULT
+var life = LIFE_DEFAULT
 
 var is_onwall = false
 var wall_direction = 0
@@ -33,6 +42,12 @@ var is_taking_damage = false
 var is_imune_to_damage = false
 var is_knockback_damage = false
 var is_alive = true
+
+var is_interacting_with_holder = false
+var power_up_holder = null
+var selected_slot = null
+
+var power_ups = [-1, -1, -1]
 
 var is_godmode_enabled = false
 
@@ -53,6 +68,7 @@ func _physics_process(delta):
 	if not is_knockback_damage:
 		process_input(delta)
 	
+	process_actions(delta)
 	process_movement(delta)
 	process_animation(delta)
 	
@@ -78,6 +94,13 @@ func process_input(_delta):
 	if Input.is_action_just_released("jump"):
 		is_holding_jump = false
 	
+	# Slots
+	selected_slot = null
+	
+	for i in range(0, 3):
+		if Input.is_action_just_pressed("slot" + str(i + 1)):
+			selected_slot = i
+	
 	# DEBUG
 	if Input.is_action_just_pressed("godmode"):
 		is_godmode_enabled = not is_godmode_enabled
@@ -90,6 +113,16 @@ func process_input(_delta):
 			movement.y = -1
 		if Input.is_action_pressed("ui_down"):
 			movement.y = 1
+
+func process_actions(_delta):
+	# Exchange power up with slot
+	if is_interacting_with_holder and selected_slot != null:
+		print(power_ups)
+		var old_value = power_ups[selected_slot]
+		power_ups[selected_slot] = power_up_holder.power_up_code
+		power_up_holder.set_power_up_code(old_value)
+		$PlayerUI.set_power_ups(power_ups)
+		update_power_ups()
 
 func process_movement(delta):
 	var speed = SPEED if is_onground else SPEED_ON_AIR
@@ -179,13 +212,33 @@ func process_godmode_movement(delta):
 func verify_habilities():
 	if is_hability_walljump_enabled:
 		is_able_to_jump = is_able_to_jump or is_wall_sliding
-	
-	if is_hability_doublejump_enabled:
-		# This can be dynamically changed to enable triple and quatruple jump
-		max_n_jumps = 2
 
 func update_life_ui():
 	$PlayerUI.update_life_ui(life, max_life)
+
+func update_power_ups():
+	var life_d = 0
+	var n_jump = JUMP_DEFAULT_MAX_N
+	var enable_wall_jump = false
+	
+	for i in power_ups:
+		if i == PowerUpEnum.LIFE_PLUS_1:
+			life_d += 1
+		if i == PowerUpEnum.LIFE_PLUS_2:
+			life_d += 2
+		if i == PowerUpEnum.JUMP_PLUS_1:
+			n_jump += 1
+		if i == PowerUpEnum.JUMP_PLUS_2:
+			n_jump += 2
+		if i == PowerUpEnum.WALL_JUMP:
+			enable_wall_jump = true
+	
+	max_life = LIFE_DEFAULT + life_d
+	life = max_life
+	max_n_jumps = n_jump
+	is_hability_walljump_enabled = enable_wall_jump
+	
+	update_life_ui()
 
 func _on_JumpMaxHoldTimer_timeout():
 	is_holding_jump = false
@@ -210,7 +263,11 @@ func _on_KnockbackTimer_timeout():
 	is_knockback_damage = false
 
 func _on_PowerUp_interacting_with_holder(power_up_holder_path):
+	power_up_holder = get_node(power_up_holder_path)
 	$PlayerUI.set_key_indicators(true)
+	is_interacting_with_holder = true
 
 func _on_PowerUp_stop_interacting_with_holder():
+	is_interacting_with_holder = false
+	power_up_holder = null
 	$PlayerUI.set_key_indicators(false)
