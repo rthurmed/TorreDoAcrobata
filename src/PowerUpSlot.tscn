@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/PowerUpSlot.gd" type="Script" id=1]
+[ext_resource path="res://assets/ui-slot.png" type="Texture" id=2]
+[ext_resource path="res://assets/ui-slot-indicator.png" type="Texture" id=3]
+[ext_resource path="res://src/PowerUp.tscn" type="PackedScene" id=4]
+
+[node name="PowerUpSlot" type="TextureButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -432.0
+margin_bottom = -222.0
+texture_normal = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PowerUp" parent="." instance=ExtResource( 4 )]
+visible = false
+position = Vector2( 24, 24 )
+disable_collision = true
+
+[node name="SlotIndicator" type="Control" parent="."]
+margin_left = 6.0
+margin_top = 45.0
+margin_right = 6.0
+margin_bottom = 45.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpriteKeyboard" type="Sprite" parent="SlotIndicator"]
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 8, 8 )
+
+[node name="SpriteController" type="Sprite" parent="SlotIndicator"]
+position = Vector2( 9, 0 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 8, 8, 8 )

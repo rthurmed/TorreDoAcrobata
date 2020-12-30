@@ -22,8 +22,8 @@ var is_hability_doublejump_enabled = true
 var max_n_jumps = 1
 var timesjumped = 0
 
-var max_life = 4
-var life = 4
+var max_life = 2
+var life = 2
 
 var is_onwall = false
 var wall_direction = 0
@@ -208,3 +208,9 @@ func _on_Any_cause_damage(pos):
 
 func _on_KnockbackTimer_timeout():
 	is_knockback_damage = false
+
+func _on_PowerUp_interacting_with_holder(power_up_holder_path):
+	$PlayerUI.set_key_indicators(true)
+
+func _on_PowerUp_stop_interacting_with_holder():
+	$PlayerUI.set_key_indicators(false)

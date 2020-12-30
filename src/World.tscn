@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/blocks-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/Spinblade.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Carrier.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/MovingPlatform.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/PowerUp.tscn" type="PackedScene" id=9]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -143,6 +144,15 @@ rotate = false
 position = Vector2( -112, -464 )
 move_to = Vector2( 0, -64 )
 
+[node name="PowerUps" type="Node" parent="Navigation2D"]
+
+[node name="PowerUp1" parent="Navigation2D/PowerUps" instance=ExtResource( 9 )]
+position = Vector2( -151, -390 )
+
+[node name="PowerUp2" parent="Navigation2D/PowerUps" instance=ExtResource( 9 )]
+position = Vector2( -72, -389 )
+power_up_code = 4
+
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( -188, -26 )
 z_index = 4
@@ -177,3 +187,7 @@ texture = ExtResource( 3 )
 [connection signal="cause_damage" from="Navigation2D/Spinblades/Spinblade2" to="Player" method="_on_Any_cause_damage"]
 [connection signal="body_entered" from="Navigation2D/MovingSpinblades/Path2D1/PathFollow2D/Carrier/Spinblade" to="Navigation2D/MovingSpinblades/Path2D1/PathFollow2D/Carrier/Spinblade" method="_on_Spinblade_body_entered"]
 [connection signal="cause_damage" from="Navigation2D/MovingSpinblades/Path2D1/PathFollow2D/Carrier/Spinblade" to="Player" method="_on_Any_cause_damage"]
+[connection signal="interacting_with_holder" from="Navigation2D/PowerUps/PowerUp1" to="Player" method="_on_PowerUp_interacting_with_holder"]
+[connection signal="stop_interacting_with_holder" from="Navigation2D/PowerUps/PowerUp1" to="Player" method="_on_PowerUp_stop_interacting_with_holder"]
+[connection signal="interacting_with_holder" from="Navigation2D/PowerUps/PowerUp2" to="Player" method="_on_PowerUp_interacting_with_holder"]
+[connection signal="stop_interacting_with_holder" from="Navigation2D/PowerUps/PowerUp2" to="Player" method="_on_PowerUp_stop_interacting_with_holder"]
