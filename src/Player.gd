@@ -34,6 +34,9 @@ var is_alive = true
 var max_life = 4
 var life = 4
 
+func _ready():
+	update_life_ui()
+
 func _physics_process(delta):
 	if not is_alive:
 		return
@@ -142,6 +145,7 @@ func hit(amount = 1):
 	if is_imune_to_damage: return
 	
 	life -= amount
+	update_life_ui()
 	
 	if life <= 0:
 		is_alive = false
@@ -153,6 +157,11 @@ func hit(amount = 1):
 		is_imune_to_damage = true
 		$AnimationPlayer.play("hit")
 		$AfterHitInvincibleTimer.start()
+
+func update_life_ui():
+	for child_id in range(0, $CanvasLayer/LifeContainer.get_child_count()):
+		var child : TextureRect = $CanvasLayer/LifeContainer.get_child(child_id)
+		child.visible = child_id + 1 <= life
 
 func _on_JumpMaxHoldTimer_timeout():
 	is_holding_jump = false

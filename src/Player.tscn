@@ -1,7 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/acrobata-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://src/Player.gd" type="Script" id=2]
+[ext_resource path="res://assets/ui-slot.png" type="Texture" id=3]
+[ext_resource path="res://src/UI1Life.tscn" type="PackedScene" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -157,6 +159,83 @@ wait_time = 0.1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/die = SubResource( 11 )
 anims/hit = SubResource( 12 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SlotContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = -157.0
+margin_right = 53.0
+margin_bottom = -5.0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SlotButton1" type="TextureButton" parent="CanvasLayer/SlotContainer"]
+margin_right = 48.0
+margin_bottom = 48.0
+texture_normal = ExtResource( 3 )
+
+[node name="SlotButton2" type="TextureButton" parent="CanvasLayer/SlotContainer"]
+margin_top = 52.0
+margin_right = 48.0
+margin_bottom = 100.0
+texture_normal = ExtResource( 3 )
+
+[node name="SlotButton3" type="TextureButton" parent="CanvasLayer/SlotContainer"]
+margin_top = 104.0
+margin_right = 48.0
+margin_bottom = 152.0
+texture_normal = ExtResource( 3 )
+
+[node name="LifeContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 58.0
+margin_top = -184.0
+margin_right = 74.0
+margin_bottom = -8.0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UI1Life1" parent="CanvasLayer/LifeContainer" instance=ExtResource( 4 )]
+
+[node name="UI1Life2" parent="CanvasLayer/LifeContainer" instance=ExtResource( 4 )]
+margin_top = 20.0
+margin_bottom = 36.0
+
+[node name="UI1Life3" parent="CanvasLayer/LifeContainer" instance=ExtResource( 4 )]
+margin_top = 40.0
+margin_bottom = 56.0
+
+[node name="UI1Life4" parent="CanvasLayer/LifeContainer" instance=ExtResource( 4 )]
+margin_top = 60.0
+margin_bottom = 76.0
+
+[node name="UI1Life5" parent="CanvasLayer/LifeContainer" instance=ExtResource( 4 )]
+margin_top = 80.0
+margin_bottom = 96.0
+
+[node name="UI1Life6" parent="CanvasLayer/LifeContainer" instance=ExtResource( 4 )]
+margin_top = 100.0
+margin_bottom = 116.0
+
+[node name="UI1Life7" parent="CanvasLayer/LifeContainer" instance=ExtResource( 4 )]
+margin_top = 120.0
+margin_bottom = 136.0
+
+[node name="UI1Life8" parent="CanvasLayer/LifeContainer" instance=ExtResource( 4 )]
+margin_top = 140.0
+margin_bottom = 156.0
+
+[node name="UI1Life9" parent="CanvasLayer/LifeContainer" instance=ExtResource( 4 )]
+margin_top = 160.0
+margin_bottom = 176.0
 [connection signal="timeout" from="JumpMaxHoldTimer" to="." method="_on_JumpMaxHoldTimer_timeout"]
 [connection signal="timeout" from="AfterDeathResetTimer" to="." method="_on_AfterDeathResetTimer_timeout"]
 [connection signal="timeout" from="AfterHitInvincibleTimer" to="." method="_on_AfterHitInvincibleTimer_timeout"]
