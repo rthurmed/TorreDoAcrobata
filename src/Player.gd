@@ -18,9 +18,12 @@ var is_able_to_jump = false
 
 var is_hability_walljump_enabled = false
 var is_hability_doublejump_enabled = false
-var max_n_jumps = 1
 
+var max_n_jumps = 1
 var timesjumped = 0
+
+var max_life = 4
+var life = 4
 
 var is_onwall = false
 var wall_direction = 0
@@ -31,8 +34,7 @@ var is_imune_to_damage = false
 var is_knockback_damage = false
 var is_alive = true
 
-var max_life = 4
-var life = 4
+var is_godmode_enabled = false
 
 func _ready():
 	update_life_ui()
@@ -46,12 +48,7 @@ func _physics_process(delta):
 	
 	is_able_to_jump = is_onground or timesjumped < max_n_jumps
 	
-	if is_hability_walljump_enabled:
-		is_able_to_jump = is_able_to_jump or is_wall_sliding
-	
-	if is_hability_doublejump_enabled:
-		# This can be dynamically changed to enable triple and quatruple jump
-		max_n_jumps = 2
+	verify_habilities()
 	
 	if not is_knockback_damage:
 		process_input(delta)
@@ -80,9 +77,26 @@ func process_input(_delta):
 	
 	if Input.is_action_just_released("jump"):
 		is_holding_jump = false
+	
+	# DEBUG
+	if Input.is_action_just_pressed("godmode"):
+		is_godmode_enabled = not is_godmode_enabled
+		$CollisionShape2D.disabled = is_godmode_enabled
+		$AnimatedSprite.modulate = "80ffffff" if is_godmode_enabled else "ffffff"
+	
+	if is_godmode_enabled:
+		movement.y = 0
+		if Input.is_action_pressed("ui_up"):
+			movement.y = -1
+		if Input.is_action_pressed("ui_down"):
+			movement.y = 1
 
 func process_movement(delta):
 	var speed = SPEED if is_onground else SPEED_ON_AIR
+	
+	if is_godmode_enabled:
+		process_godmode_movement(delta)
+		return
 	
 	# 2 raycasts so the player cant slide on 1 block tall walls
 	is_onwall = $RayCastWall1.is_colliding() and $RayCastWall2.is_colliding()
@@ -158,6 +172,17 @@ func hit(amount = 1):
 		is_imune_to_damage = true
 		$AnimationPlayer.play("hit")
 		$AfterHitInvincibleTimer.start()
+
+func process_godmode_movement(delta):
+	global_position += movement * delta * 400
+
+func verify_habilities():
+	if is_hability_walljump_enabled:
+		is_able_to_jump = is_able_to_jump or is_wall_sliding
+	
+	if is_hability_doublejump_enabled:
+		# This can be dynamically changed to enable triple and quatruple jump
+		max_n_jumps = 2
 
 func update_life_ui():
 	for child_id in range(0, $CanvasLayer/LifeContainer.get_child_count()):
