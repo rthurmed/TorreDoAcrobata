@@ -16,8 +16,8 @@ var is_starting_jump = false
 var is_holding_jump = false
 var is_able_to_jump = false
 
-var is_hability_walljump_enabled = true
-var is_hability_doublejump_enabled = true
+var is_hability_walljump_enabled = false
+var is_hability_doublejump_enabled = false
 var max_n_jumps = 1
 
 var timesjumped = 0
@@ -115,7 +115,8 @@ func process_movement(delta):
 			velocity.y = GRAVITY
 	
 	# warning-ignore:return_value_discarded
-	move_and_slide(velocity, Vector2(0, -1))
+	var snap = Vector2.DOWN * 16 if not is_holding_jump else Vector2.ZERO
+	move_and_slide_with_snap(velocity, snap, Vector2(0, -1))
 	
 	if moving:
 		$RayCastWall1.scale.x = movement.x

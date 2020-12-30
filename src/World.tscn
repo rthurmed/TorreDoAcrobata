@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/blocks-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://src/LargePlatform.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Platform.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Spinblade.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Carrier.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/MovingPlatform.tscn" type="PackedScene" id=8]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -55,6 +57,11 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 2
+
+[sub_resource type="Curve2D" id=5]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -190, -543, 0, 0, 0, 0, -32, -543, 0, 0, 0, 0, -190, -543 )
+}
 
 [node name="World" type="Node2D"]
 
@@ -117,6 +124,25 @@ position = Vector2( -127, -265 )
 [node name="Spinblade2" parent="Navigation2D/Spinblades" instance=ExtResource( 6 )]
 position = Vector2( -17, -166 )
 
+[node name="MovingSpinblades" type="Node" parent="Navigation2D"]
+
+[node name="Path2D1" type="Path2D" parent="Navigation2D/MovingSpinblades"]
+curve = SubResource( 5 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Navigation2D/MovingSpinblades/Path2D1"]
+position = Vector2( -190, -543 )
+rotate = false
+
+[node name="Carrier" parent="Navigation2D/MovingSpinblades/Path2D1/PathFollow2D" instance=ExtResource( 7 )]
+
+[node name="Spinblade" parent="Navigation2D/MovingSpinblades/Path2D1/PathFollow2D/Carrier" instance=ExtResource( 6 )]
+
+[node name="MovingPlatforms" type="Node" parent="Navigation2D"]
+
+[node name="MovingPlatform" parent="Navigation2D/MovingPlatforms" instance=ExtResource( 8 )]
+position = Vector2( -112, -464 )
+move_to = Vector2( 0, -64 )
+
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( -188, -26 )
 z_index = 4
@@ -149,3 +175,5 @@ texture = ExtResource( 3 )
 [connection signal="cause_damage" from="Navigation2D/Spinblades/Spinblade" to="Player" method="_on_Any_cause_damage"]
 [connection signal="body_entered" from="Navigation2D/Spinblades/Spinblade2" to="Navigation2D/Spinblades/Spinblade2" method="_on_Spinblade_body_entered"]
 [connection signal="cause_damage" from="Navigation2D/Spinblades/Spinblade2" to="Player" method="_on_Any_cause_damage"]
+[connection signal="body_entered" from="Navigation2D/MovingSpinblades/Path2D1/PathFollow2D/Carrier/Spinblade" to="Navigation2D/MovingSpinblades/Path2D1/PathFollow2D/Carrier/Spinblade" method="_on_Spinblade_body_entered"]
+[connection signal="cause_damage" from="Navigation2D/MovingSpinblades/Path2D1/PathFollow2D/Carrier/Spinblade" to="Player" method="_on_Any_cause_damage"]
