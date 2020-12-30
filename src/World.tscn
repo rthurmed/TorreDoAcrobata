@@ -114,6 +114,9 @@ position = Vector2( -189, -424 )
 [node name="Spinblade" parent="Navigation2D/Spinblades" instance=ExtResource( 6 )]
 position = Vector2( -127, -265 )
 
+[node name="Spinblade2" parent="Navigation2D/Spinblades" instance=ExtResource( 6 )]
+position = Vector2( -17, -166 )
+
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( -188, -26 )
 z_index = 4
@@ -144,3 +147,5 @@ motion_offset = Vector2( 0, -250 )
 texture = ExtResource( 3 )
 [connection signal="body_entered" from="Navigation2D/Spinblades/Spinblade" to="Navigation2D/Spinblades/Spinblade" method="_on_Spinblade_body_entered"]
 [connection signal="cause_damage" from="Navigation2D/Spinblades/Spinblade" to="Player" method="_on_Any_cause_damage"]
+[connection signal="body_entered" from="Navigation2D/Spinblades/Spinblade2" to="Navigation2D/Spinblades/Spinblade2" method="_on_Spinblade_body_entered"]
+[connection signal="cause_damage" from="Navigation2D/Spinblades/Spinblade2" to="Player" method="_on_Any_cause_damage"]

@@ -66,7 +66,7 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 5.5, 10.5 )
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=11]
 resource_name = "die"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:position")
@@ -105,8 +105,7 @@ tracks/2/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 2, 2 ) ]
 }
 
-[sub_resource type="Animation" id=11]
-resource_name = "hit"
+[sub_resource type="Animation" id=12]
 length = 0.4
 loop = true
 step = 0.01
@@ -145,15 +144,20 @@ enabled = true
 cast_to = Vector2( 8, 0 )
 
 [node name="JumpMaxHoldTimer" type="Timer" parent="."]
+wait_time = 0.4
 
 [node name="AfterDeathResetTimer" type="Timer" parent="."]
 
 [node name="AfterHitInvincibleTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="KnockbackTimer" type="Timer" parent="."]
+wait_time = 0.1
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/die = SubResource( 12 )
-anims/hit = SubResource( 11 )
+anims/die = SubResource( 11 )
+anims/hit = SubResource( 12 )
 [connection signal="timeout" from="JumpMaxHoldTimer" to="." method="_on_JumpMaxHoldTimer_timeout"]
 [connection signal="timeout" from="AfterDeathResetTimer" to="." method="_on_AfterDeathResetTimer_timeout"]
 [connection signal="timeout" from="AfterHitInvincibleTimer" to="." method="_on_AfterHitInvincibleTimer_timeout"]
+[connection signal="timeout" from="KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]

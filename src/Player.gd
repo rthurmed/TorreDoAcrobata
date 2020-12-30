@@ -28,10 +28,11 @@ var is_wall_sliding = false
 
 var is_taking_damage = false
 var is_imune_to_damage = false
+var is_knockback_damage = false
 var is_alive = true
 
-var max_life = 2
-var life = 2
+var max_life = 4
+var life = 4
 
 func _physics_process(delta):
 	if not is_alive:
@@ -49,9 +50,14 @@ func _physics_process(delta):
 		# This can be dynamically changed to enable triple and quatruple jump
 		max_n_jumps = 2
 	
-	process_input(delta)
+	if not is_knockback_damage:
+		process_input(delta)
+	
 	process_movement(delta)
 	process_animation(delta)
+	
+	if is_onground:
+		is_knockback_damage = false
 
 func process_input(_delta):
 	moving = Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
@@ -159,6 +165,13 @@ func _on_AfterDeathResetTimer_timeout():
 	# warning-ignore:return_value_discarded
 	get_tree().reload_current_scene()
 
-func _on_Any_cause_damage(_pos):
+func _on_Any_cause_damage(pos):
 	hit(1)
-	# TODO: Knockback?
+	
+	# Apply knockback
+	movement = (global_position - pos).normalized() * 2
+	is_knockback_damage = true
+	$KnockbackTimer.start()
+
+func _on_KnockbackTimer_timeout():
+	is_knockback_damage = false
