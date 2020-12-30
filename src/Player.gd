@@ -16,8 +16,8 @@ var is_starting_jump = false
 var is_holding_jump = false
 var is_able_to_jump = false
 
-var is_hability_walljump_enabled = false
-var is_hability_doublejump_enabled = false
+var is_hability_walljump_enabled = true
+var is_hability_doublejump_enabled = true
 
 var max_n_jumps = 1
 var timesjumped = 0
@@ -185,9 +185,7 @@ func verify_habilities():
 		max_n_jumps = 2
 
 func update_life_ui():
-	for child_id in range(0, $CanvasLayer/LifeContainer.get_child_count()):
-		var child : TextureRect = $CanvasLayer/LifeContainer.get_child(child_id)
-		child.visible = child_id + 1 <= life
+	$PlayerUI.update_life_ui(life, max_life)
 
 func _on_JumpMaxHoldTimer_timeout():
 	is_holding_jump = false
