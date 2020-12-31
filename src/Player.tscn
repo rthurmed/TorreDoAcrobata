@@ -65,7 +65,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 5.5, 10.5 )
+extents = Vector2( 5.5, 11.5 )
 
 [sub_resource type="Animation" id=11]
 resource_name = "die"

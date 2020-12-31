@@ -8,8 +8,8 @@ enum PowerUpEnum {
 	WALL_JUMP = 4
 }
 
-const SPEED = 10000
-const SPEED_ON_AIR = 8000
+const SPEED = 9000
+const SPEED_ON_AIR = 7000
 const GRAVITY = 200
 const GRAVITY_SLIDE = 50
 const JUMP_POWER = -300
@@ -117,7 +117,6 @@ func process_input(_delta):
 func process_actions(_delta):
 	# Exchange power up with slot
 	if is_interacting_with_holder and selected_slot != null:
-		print(power_ups)
 		var old_value = power_ups[selected_slot]
 		power_ups[selected_slot] = power_up_holder.power_up_code
 		power_up_holder.set_power_up_code(old_value)
