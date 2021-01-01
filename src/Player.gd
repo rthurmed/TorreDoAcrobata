@@ -152,7 +152,7 @@ func process_movement(delta):
 		is_holding_jump = false
 	
 	if is_able_to_jump and is_starting_jump:
-		$JumpMaxHoldTimer.start()
+		$Timer/JumpMaxHoldTimer.start()
 		is_starting_jump = false
 		timesjumped += 1
 		velocity.y = JUMP_POWER
@@ -211,13 +211,13 @@ func hit(amount = 1):
 		is_imune_to_damage = true
 		$AnimatedSprite.play("fall")
 		$AnimationPlayer.play("die")
-		$AfterDeathResetTimer.start()
+		$Timer/AfterDeathResetTimer.start()
 		$Audio/Die.play()
 	else:
 		waiting_hurt_sound = true
 		is_imune_to_damage = true
 		$AnimationPlayer.play("hit")
-		$AfterHitInvincibleTimer.start()
+		$Timer/AfterHitInvincibleTimer.start()
 
 func process_godmode_movement(delta):
 	global_position += movement * delta * 400
@@ -259,6 +259,7 @@ func _on_JumpMaxHoldTimer_timeout():
 
 func _on_AfterHitInvincibleTimer_timeout():
 	$AnimationPlayer.stop(true)
+	$AnimationPlayer.seek(0, true)
 	is_imune_to_damage = false
 
 func _on_AfterDeathResetTimer_timeout():
@@ -271,7 +272,7 @@ func _on_Any_cause_damage(pos):
 	# Apply knockback
 	movement = (global_position - pos).normalized() * 2
 	is_knockback_damage = true
-	$KnockbackTimer.start()
+	$Timer/KnockbackTimer.start()
 
 func _on_KnockbackTimer_timeout():
 	is_knockback_damage = false

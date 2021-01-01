@@ -20,6 +20,7 @@ __meta__ = {
 visible = false
 position = Vector2( 24, 24 )
 disable_collision = true
+wavy_text = false
 
 [node name="SlotIndicator" type="Control" parent="."]
 margin_left = 6.0
