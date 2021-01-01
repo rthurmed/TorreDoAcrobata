@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/fly_away.wav-1496f325e0f7f4811b5d2119dfa4ce13.sample"
+
+[deps]
+
+source_file="res://assets/sfx/NES sounds/fly_away.wav"
+dest_files=[ "res://.import/fly_away.wav-1496f325e0f7f4811b5d2119dfa4ce13.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/magic.wav-b52c339f033b868456444dd69ed60751.sample"
+
+[deps]
+
+source_file="res://assets/sfx/NES sounds/magic.wav"
+dest_files=[ "res://.import/magic.wav-b52c339f033b868456444dd69ed60751.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

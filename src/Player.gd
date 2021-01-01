@@ -25,6 +25,7 @@ var is_onceiling = false
 var is_starting_jump = false
 var is_holding_jump = false
 var is_able_to_jump = false
+var has_started_jump = false
 
 var is_hability_walljump_enabled = false
 
@@ -51,12 +52,16 @@ var power_ups = [-1, -1, -1]
 
 var is_godmode_enabled = false
 
+var waiting_hurt_sound = false
+
 func _ready():
 	update_life_ui()
 
 func _physics_process(delta):
 	if not is_alive:
 		return
+	
+	has_started_jump = false
 	
 	is_onground = is_on_floor()
 	is_onceiling = is_on_ceiling()
@@ -71,6 +76,7 @@ func _physics_process(delta):
 	process_actions(delta)
 	process_movement(delta)
 	process_animation(delta)
+	process_audio(delta)
 	
 	if is_onground:
 		is_knockback_damage = false
@@ -150,6 +156,7 @@ func process_movement(delta):
 		is_starting_jump = false
 		timesjumped += 1
 		velocity.y = JUMP_POWER
+		has_started_jump = true
 	
 	if not is_onground:
 		if is_holding_jump:
@@ -188,6 +195,11 @@ func process_animation(_delta):
 	
 	$AnimatedSprite.play(animate)
 
+func process_audio(_delta):
+	if waiting_hurt_sound:
+		$Audio/Hurt.play()
+		waiting_hurt_sound = false
+
 func hit(amount = 1):
 	if is_imune_to_damage: return
 	
@@ -200,7 +212,9 @@ func hit(amount = 1):
 		$AnimatedSprite.play("fall")
 		$AnimationPlayer.play("die")
 		$AfterDeathResetTimer.start()
+		$Audio/Die.play()
 	else:
+		waiting_hurt_sound = true
 		is_imune_to_damage = true
 		$AnimationPlayer.play("hit")
 		$AfterHitInvincibleTimer.start()
@@ -237,6 +251,7 @@ func update_power_ups():
 	max_n_jumps = n_jump
 	is_hability_walljump_enabled = enable_wall_jump
 	
+	$Audio/PowerUp.play()
 	update_life_ui()
 
 func _on_JumpMaxHoldTimer_timeout():
