@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 MiscInputHandler="*res://src/MiscInputHandler.gd"
+Soundtrack="*res://src/Soundtrack.tscn"
 
 [display]
 

@@ -290,10 +290,10 @@ position = Vector2( -24, -1680 )
 position = Vector2( -64, -2400 )
 
 [node name="Spinblade25" parent="Navigation2D/Spinblades" instance=ExtResource( 6 )]
-position = Vector2( -72, -2368 )
+position = Vector2( -78, -2367 )
 
 [node name="Spinblade26" parent="Navigation2D/Spinblades" instance=ExtResource( 6 )]
-position = Vector2( -65, -2336 )
+position = Vector2( -72, -2335 )
 
 [node name="Spinblade27" parent="Navigation2D/Spinblades" instance=ExtResource( 6 )]
 position = Vector2( -65, -2304 )
@@ -380,22 +380,22 @@ position = Vector2( -132, -2416 )
 position = Vector2( -138, -2352 )
 
 [node name="Spinblade56" parent="Navigation2D/Spinblades" instance=ExtResource( 6 )]
-position = Vector2( -132, -2319 )
+position = Vector2( -130, -2319 )
 
 [node name="Spinblade57" parent="Navigation2D/Spinblades" instance=ExtResource( 6 )]
-position = Vector2( -124, -2287 )
+position = Vector2( -123, -2288 )
 
 [node name="Spinblade58" parent="Navigation2D/Spinblades" instance=ExtResource( 6 )]
-position = Vector2( -132, -2255 )
+position = Vector2( -128, -2255 )
 
 [node name="Spinblade59" parent="Navigation2D/Spinblades" instance=ExtResource( 6 )]
 position = Vector2( -132, -2223 )
 
 [node name="Spinblade60" parent="Navigation2D/Spinblades" instance=ExtResource( 6 )]
-position = Vector2( -140, -2191 )
+position = Vector2( -146, -2191 )
 
 [node name="Spinblade61" parent="Navigation2D/Spinblades" instance=ExtResource( 6 )]
-position = Vector2( -140, -2159 )
+position = Vector2( -146, -2159 )
 
 [node name="Spinblade62" parent="Navigation2D/Spinblades" instance=ExtResource( 6 )]
 position = Vector2( -132, -2127 )

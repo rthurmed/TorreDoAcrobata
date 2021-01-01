@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/danger_streets.ogg-fd276e5924177cd377c9ab678948caf2.oggstr"
+
+[deps]
+
+source_file="res://assets/music/danger_streets/danger_streets.ogg"
+dest_files=[ "res://.import/danger_streets.ogg-fd276e5924177cd377c9ab678948caf2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
