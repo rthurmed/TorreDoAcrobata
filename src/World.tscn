@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://src/Carrier.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/MovingPlatform.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/PowerUp.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/World.gd" type="Script" id=10]
+[ext_resource path="res://src/PauseMenu.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -26,6 +28,7 @@ _data = {
 }
 
 [node name="World" type="Node2D"]
+script = ExtResource( 10 )
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
 
@@ -502,6 +505,9 @@ motion_offset = Vector2( 0, -250 )
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
 texture = ExtResource( 3 )
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 11 )]
+visible = false
 [connection signal="body_entered" from="Navigation2D/Spinblades/Spinblade1" to="Navigation2D/Spinblades/Spinblade1" method="_on_Spinblade_body_entered"]
 [connection signal="cause_damage" from="Navigation2D/Spinblades/Spinblade1" to="Player" method="_on_Any_cause_damage"]
 [connection signal="body_entered" from="Navigation2D/Spinblades/Spinblade2" to="Navigation2D/Spinblades/Spinblade2" method="_on_Spinblade_body_entered"]
