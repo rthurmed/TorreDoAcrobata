@@ -23,6 +23,7 @@ config/icon="res://icon.png"
 
 MiscInputHandler="*res://src/MiscInputHandler.gd"
 Soundtrack="*res://src/Soundtrack.tscn"
+SaveDataManager="*res://src/SaveDataManager.gd"
 
 [display]
 

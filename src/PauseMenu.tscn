@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/font/menu_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://src/PauseMenu.gd" type="Script" id=2]
+[ext_resource path="res://src/FliesCount.tscn" type="PackedScene" id=3]
 
 [node name="PauseMenu" type="Control"]
 pause_mode = 2
@@ -16,6 +17,12 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0.313726 )
+
+[node name="FliesCount" parent="." instance=ExtResource( 3 )]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 5.0
+margin_bottom = 5.0
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
@@ -39,7 +46,7 @@ flat = true
 
 [node name="ToggleMusicButton" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 25.0
-margin_right = 154.562
+margin_right = 154.0
 margin_bottom = 46.0
 focus_neighbour_top = NodePath("../ResumeButton")
 focus_neighbour_bottom = NodePath("../QuitButton")

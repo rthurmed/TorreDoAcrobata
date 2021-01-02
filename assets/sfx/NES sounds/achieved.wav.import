@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/achieved.wav-0e37d24462904e54a4e3b65133bc9080.sample"
+
+[deps]
+
+source_file="res://assets/sfx/NES sounds/achieved.wav"
+dest_files=[ "res://.import/achieved.wav-0e37d24462904e54a4e3b65133bc9080.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

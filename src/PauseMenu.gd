@@ -10,10 +10,10 @@ func open():
 	visible = true
 	get_tree().paused = true
 	$CenterContainer/VBoxContainer/ResumeButton.grab_focus()
+	$FliesCount.update_fly_count()
 
 func _on_ResumeButton_pressed():
-	visible = false
-	get_tree().paused = false
+	unpause()
 
 func _on_QuitButton_pressed():
 	get_tree().quit()
@@ -30,3 +30,7 @@ func update_music_text():
 		$CenterContainer/VBoxContainer/ToggleMusicButton.text = "MUSIC: ON"
 	else:
 		$CenterContainer/VBoxContainer/ToggleMusicButton.text = "MUSIC: OFF"
+
+func unpause():
+	visible = false
+	get_tree().paused = false
