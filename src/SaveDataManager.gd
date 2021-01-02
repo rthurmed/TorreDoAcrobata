@@ -84,4 +84,3 @@ func load_options():
 func update_sountrack():
 	var volume = MUSIC_ON if music else MUSIC_OFF
 	$"/root/Soundtrack".volume_db = volume
-	print(volume, ":", music)

@@ -10,11 +10,13 @@ enum PowerUpEnum {
 
 const SPEED = 9000
 const SPEED_ON_AIR = 7000
-const GRAVITY = 200
-const GRAVITY_SLIDE = 50
+const GRAVITY = 180
+const GRAVITY_SLIDE_DEFAULT = 90
+const GRAVITY_SLIDE_DIFF = 30
 const JUMP_POWER = -300
 const LIFE_DEFAULT = 2
 const JUMP_DEFAULT_MAX_N = 1
+const MAX_SLOT_N = 3
 
 var movement = Vector2()
 var velocity = Vector2()
@@ -28,6 +30,7 @@ var is_able_to_jump = false
 var has_started_jump = false
 
 var is_hability_walljump_enabled = false
+var gravity_slide = GRAVITY_SLIDE_DEFAULT
 
 var max_n_jumps = JUMP_DEFAULT_MAX_N
 var timesjumped = 0
@@ -51,7 +54,6 @@ var selected_slot = null
 var power_ups = [-1, -1, -1]
 
 var is_godmode_enabled = false
-
 var waiting_hurt_sound = false
 
 func _ready():
@@ -162,7 +164,7 @@ func process_movement(delta):
 		if is_holding_jump:
 			velocity.y = lerp(velocity.y, 0, 5 * delta)
 		elif is_wall_sliding:
-			velocity.y = GRAVITY_SLIDE
+			velocity.y = gravity_slide
 			timesjumped = 0
 		else:
 			velocity.y = GRAVITY
@@ -232,6 +234,7 @@ func update_life_ui():
 func update_power_ups():
 	var life_d = 0
 	var n_jump = JUMP_DEFAULT_MAX_N
+	var n_gravity_slide = GRAVITY_SLIDE_DEFAULT
 	var enable_wall_jump = false
 	
 	for i in power_ups:
@@ -245,10 +248,12 @@ func update_power_ups():
 			n_jump += 2
 		if i == PowerUpEnum.WALL_JUMP:
 			enable_wall_jump = true
+			n_gravity_slide -= GRAVITY_SLIDE_DIFF
 	
 	max_life = LIFE_DEFAULT + life_d
 	life = max_life
 	max_n_jumps = n_jump
+	gravity_slide = n_gravity_slide
 	is_hability_walljump_enabled = enable_wall_jump
 	
 	$Audio/PowerUp.play()

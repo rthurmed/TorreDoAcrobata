@@ -128,6 +128,12 @@ position = Vector2( -157, -1984 )
 [node name="Platform27" parent="Navigation2D/Platforms" instance=ExtResource( 5 )]
 position = Vector2( -207, -2713 )
 
+[node name="Platform28" parent="Navigation2D/Platforms" instance=ExtResource( 5 )]
+position = Vector2( -203, -2921 )
+
+[node name="Platform29" parent="Navigation2D/Platforms" instance=ExtResource( 5 )]
+position = Vector2( -21, -2921 )
+
 [node name="LargePlatforms" type="Node" parent="Navigation2D"]
 
 [node name="LargePlatform1" parent="Navigation2D/LargePlatforms" instance=ExtResource( 4 )]
@@ -195,6 +201,18 @@ position = Vector2( -193, -2526 )
 
 [node name="LargePlatform23" parent="Navigation2D/LargePlatforms" instance=ExtResource( 4 )]
 position = Vector2( -32, -2846 )
+
+[node name="LargePlatform24" parent="Navigation2D/LargePlatforms" instance=ExtResource( 4 )]
+position = Vector2( -159, -2883 )
+
+[node name="LargePlatform25" parent="Navigation2D/LargePlatforms" instance=ExtResource( 4 )]
+position = Vector2( -64, -2883 )
+
+[node name="LargePlatform26" parent="Navigation2D/LargePlatforms" instance=ExtResource( 4 )]
+position = Vector2( -30, -2958 )
+
+[node name="LargePlatform27" parent="Navigation2D/LargePlatforms" instance=ExtResource( 4 )]
+position = Vector2( -194, -2958 )
 
 [node name="MovingPlatforms" type="Node" parent="Navigation2D"]
 
@@ -410,10 +428,10 @@ position = Vector2( -131, -2512 )
 position = Vector2( -132, -2480 )
 
 [node name="Spinblade52" parent="Navigation2D/Spinblades" instance=ExtResource( 6 )]
-position = Vector2( -132, -2448 )
+position = Vector2( -150, -2455 )
 
 [node name="Spinblade53" parent="Navigation2D/Spinblades" instance=ExtResource( 6 )]
-position = Vector2( -132, -2416 )
+position = Vector2( -132, -2430 )
 
 [node name="Spinblade55" parent="Navigation2D/Spinblades" instance=ExtResource( 6 )]
 position = Vector2( -138, -2352 )
@@ -550,6 +568,14 @@ power_up_code = 1
 
 [node name="PowerUp6" parent="Navigation2D/PowerUps" instance=ExtResource( 9 )]
 position = Vector2( -75, -1867 )
+power_up_code = 3
+
+[node name="PowerUp7" parent="Navigation2D/PowerUps" instance=ExtResource( 9 )]
+position = Vector2( -150, -2923 )
+power_up_code = 4
+
+[node name="PowerUp8" parent="Navigation2D/PowerUps" instance=ExtResource( 9 )]
+position = Vector2( -73, -2923 )
 power_up_code = 3
 
 [node name="Flys" type="Node" parent="Navigation2D"]
@@ -775,6 +801,10 @@ volume_db = -10.0
 [connection signal="stop_interacting_with_holder" from="Navigation2D/PowerUps/PowerUp5" to="Player" method="_on_PowerUp_stop_interacting_with_holder"]
 [connection signal="interacting_with_holder" from="Navigation2D/PowerUps/PowerUp6" to="Player" method="_on_PowerUp_interacting_with_holder"]
 [connection signal="stop_interacting_with_holder" from="Navigation2D/PowerUps/PowerUp6" to="Player" method="_on_PowerUp_stop_interacting_with_holder"]
+[connection signal="interacting_with_holder" from="Navigation2D/PowerUps/PowerUp7" to="Player" method="_on_PowerUp_interacting_with_holder"]
+[connection signal="stop_interacting_with_holder" from="Navigation2D/PowerUps/PowerUp7" to="Player" method="_on_PowerUp_stop_interacting_with_holder"]
+[connection signal="interacting_with_holder" from="Navigation2D/PowerUps/PowerUp8" to="Player" method="_on_PowerUp_interacting_with_holder"]
+[connection signal="stop_interacting_with_holder" from="Navigation2D/PowerUps/PowerUp8" to="Player" method="_on_PowerUp_stop_interacting_with_holder"]
 [connection signal="collected" from="Navigation2D/Flys/Fly1" to="." method="_on_Fly_collected"]
 [connection signal="collected" from="Navigation2D/Flys/Fly2" to="." method="_on_Fly_collected"]
 [connection signal="collected" from="Navigation2D/Flys/Fly3" to="." method="_on_Fly_collected"]

@@ -14,7 +14,7 @@ const PowerUpLabel = {
 	PowerUpEnum.JUMP_PLUS_2: 	"+2 jump",
 	PowerUpEnum.LIFE_PLUS_1: 	"+1 life",
 	PowerUpEnum.LIFE_PLUS_2: 	"+2 life",
-	PowerUpEnum.WALL_JUMP:		"wall jump"
+	PowerUpEnum.WALL_JUMP:		"+wall slide"
 }
 
 signal interacting_with_holder(power_up_holder_path)
