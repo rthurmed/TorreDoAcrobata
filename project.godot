@@ -21,9 +21,9 @@ config/icon="res://icon.png"
 
 [autoload]
 
-MiscInputHandler="*res://src/MiscInputHandler.gd"
-Soundtrack="*res://src/Soundtrack.tscn"
 SaveDataManager="*res://src/SaveDataManager.gd"
+Soundtrack="*res://src/Soundtrack.tscn"
+MiscInputHandler="*res://src/MiscInputHandler.gd"
 
 [display]
 

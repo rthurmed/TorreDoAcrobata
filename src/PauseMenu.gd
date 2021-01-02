@@ -19,17 +19,13 @@ func _on_QuitButton_pressed():
 	get_tree().quit()
 
 func _on_ToggleMusicButton_pressed():
-	if $"/root/Soundtrack".volume_db == MUSIC_ON:
-		$"/root/Soundtrack".volume_db = MUSIC_OFF
-	else:
-		$"/root/Soundtrack".volume_db = MUSIC_ON
+	var music = not $"/root/SaveDataManager".music
+	$"/root/SaveDataManager".save_options(music)
 	update_music_text()
 
 func update_music_text():
-	if $"/root/Soundtrack".volume_db == MUSIC_ON:
-		$CenterContainer/VBoxContainer/ToggleMusicButton.text = "MUSIC: ON"
-	else:
-		$CenterContainer/VBoxContainer/ToggleMusicButton.text = "MUSIC: OFF"
+	var text = "MUSIC: ON" if $"/root/SaveDataManager".music else "MUSIC: OFF"
+	$CenterContainer/VBoxContainer/ToggleMusicButton.text = text
 
 func unpause():
 	visible = false

@@ -1,8 +1,7 @@
 extends Node2D
 
 func _ready():
-	if not $"/root/Soundtrack".playing:
-		$"/root/Soundtrack".play()
+	$"/root/Soundtrack".play()
 	load_state()
 
 func _physics_process(delta):
