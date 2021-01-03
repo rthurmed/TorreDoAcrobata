@@ -1,5 +1,8 @@
 extends KinematicBody2D
 
+signal dead
+signal updated_power_ups(power_ups)
+
 enum PowerUpEnum {
 	JUMP_PLUS_1 = 0,
 	JUMP_PLUS_2 = 1,
@@ -8,7 +11,7 @@ enum PowerUpEnum {
 	WALL_JUMP = 4
 }
 
-const SPEED = 9000
+const SPEED = 7000
 const SPEED_ON_AIR = 7000
 const GRAVITY = 180
 const GRAVITY_SLIDE_DEFAULT = 90
@@ -126,9 +129,8 @@ func process_actions(_delta):
 	# Exchange power up with slot
 	if is_interacting_with_holder and selected_slot != null:
 		var old_value = power_ups[selected_slot]
-		power_ups[selected_slot] = power_up_holder.power_up_code
+		power_ups[selected_slot] = power_up_holder.code
 		power_up_holder.set_power_up_code(old_value)
-		$PlayerUI.set_power_ups(power_ups)
 		update_power_ups()
 
 func process_movement(delta):
@@ -237,6 +239,8 @@ func update_power_ups():
 	var n_gravity_slide = GRAVITY_SLIDE_DEFAULT
 	var enable_wall_jump = false
 	
+	$PlayerUI.set_power_ups(power_ups)
+	
 	for i in power_ups:
 		if i == PowerUpEnum.LIFE_PLUS_1:
 			life_d += 1
@@ -258,6 +262,19 @@ func update_power_ups():
 	
 	$Audio/PowerUp.play()
 	update_life_ui()
+	emit_signal("updated_power_ups", power_ups)
+
+func reset():
+	$AnimationPlayer.stop(true)
+	$AnimationPlayer.seek(0, true)
+	$Timer/AfterHitInvincibleTimer.start()
+	$AnimationPlayer.play("hit")
+	is_imune_to_damage = true
+	is_alive = true
+	life = LIFE_DEFAULT
+	movement = Vector2()
+	power_ups = [-1, -1, -1]
+	update_power_ups()
 
 func _on_JumpMaxHoldTimer_timeout():
 	is_holding_jump = false
@@ -269,7 +286,7 @@ func _on_AfterHitInvincibleTimer_timeout():
 
 func _on_AfterDeathResetTimer_timeout():
 	# warning-ignore:return_value_discarded
-	get_tree().reload_current_scene()
+	emit_signal("dead")
 
 func _on_Any_cause_damage(pos):
 	hit(1)

@@ -24,30 +24,35 @@ export (PowerUpEnum) var power_up_code = PowerUpEnum.JUMP_PLUS_1
 export (bool) var disable_collision = false
 export (bool) var wavy_text = true
 
+var code = 0
+
 func _ready():
 	$CollisionShape2D.disabled = disable_collision
+	code = power_up_code
 	update_sprite()
 	update_text()
 
-func set_power_up_code(code):
-	power_up_code = code
+func reset():
+	code = power_up_code
+	visible = true
+	update_sprite()
+	update_text()
+
+func set_power_up_code(c):
+	code = c
 	
 	# Slots with -1 as code need to be hidden
-	visible = code >= 0
+	visible = c >= 0
 	
 	update_sprite()
 	update_text()
 
 func update_sprite():
-	$Sprite.region_rect.position.x = power_up_code * 32
+	$Sprite.region_rect.position.x = code * 32
 
 func update_text():
-	$Text/RichTextLabel.bbcode_text = ""
-	
-	if wavy_text:
-		$Text/RichTextLabel.bbcode_text += "[wave]"
-	
-	$Text/RichTextLabel.bbcode_text += PowerUpLabel[power_up_code]
+	$Text/RichTextLabel.bbcode_text = "[wave]" if wavy_text else ""
+	$Text/RichTextLabel.bbcode_text += PowerUpLabel[code]
 
 func _on_PowerUp_body_entered(body):
 	if body.name == "Player":

@@ -14,14 +14,14 @@ func _ready():
 	load_game()
 
 # ====== GAME DATA (flies) ======
-func save_game(values):
+func save_game(flies):
 	var file = File.new()
 	
 	file.open(savefile_path, File.WRITE)
-	file.store_var(values)
+	file.store_var(flies)
 	file.close()
 	
-	flies_array = values
+	flies_array = flies
 	update_amount_collected()
 
 func load_game():
@@ -32,10 +32,10 @@ func load_game():
 		return
 	
 	file.open(savefile_path, File.READ)
-	var values: Array = file.get_var()
+	var flies: Array = file.get_var()
 	file.close()
 	
-	flies_array = values
+	flies_array = flies
 	update_amount_collected()
 
 func reset_save_game():
