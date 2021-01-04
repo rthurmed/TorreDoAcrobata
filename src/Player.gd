@@ -172,7 +172,7 @@ func process_movement(delta):
 			velocity.y = GRAVITY
 	
 	# warning-ignore:return_value_discarded
-	var snap = Vector2.DOWN * 16 if not is_holding_jump else Vector2.ZERO
+	var snap = Vector2.DOWN * 8 if not is_holding_jump else Vector2.ZERO
 	move_and_slide_with_snap(velocity, snap, Vector2(0, -1))
 	
 	if moving:
