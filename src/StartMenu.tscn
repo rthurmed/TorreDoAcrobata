@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/font/menu_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://src/StartMenu.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://src/FliesCount.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/startmenu-tower.png" type="Texture" id=5]
 [ext_resource path="res://assets/poster.png" type="Texture" id=6]
+[ext_resource path="res://src/Instructions.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 12
@@ -48,9 +49,9 @@ __meta__ = {
 
 [node name="Toad" type="TextureRect" parent="Decorations"]
 margin_left = 334.0
-margin_top = 83.0
+margin_top = 123.0
 margin_right = 462.0
-margin_bottom = 211.0
+margin_bottom = 251.0
 texture = ExtResource( 6 )
 expand = true
 __meta__ = {
@@ -148,6 +149,10 @@ scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Instructions" parent="." instance=ExtResource( 7 )]
+anchor_left = 1.0
+anchor_right = 1.0
 [connection signal="pressed" from="CenterContainer/VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/ToggleMusicButton" to="." method="_on_ToggleMusicButton_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/ResetCollectiblesButton" to="." method="_on_ResetCollectiblesButton_pressed"]
