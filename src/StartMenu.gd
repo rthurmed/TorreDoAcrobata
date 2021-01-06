@@ -1,8 +1,5 @@
 extends Control
 
-const MUSIC_ON = -10
-const MUSIC_OFF = -80
-
 const savefile_path = "user://flies.save"
 
 func _ready():
@@ -25,7 +22,7 @@ func _on_ToggleMusicButton_pressed():
 	update_music_text()
 
 func update_music_text():
-	var text = "MUSIC: ON" if $"/root/SaveDataManager".music else "MUSIC: OFF"
+	var text = "MUSICA: LIGADA" if $"/root/SaveDataManager".music else "MUSICA: DESLIGADA"
 	$CenterContainer/VBoxContainer/ToggleMusicButton.text = text
 
 func _on_ResetCollectiblesButton_pressed():

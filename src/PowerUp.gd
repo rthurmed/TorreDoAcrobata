@@ -10,10 +10,10 @@ enum PowerUpEnum {
 
 const PowerUpLabel = {
 	-1: "",
-	PowerUpEnum.JUMP_PLUS_1: 	"+1 jump",
-	PowerUpEnum.JUMP_PLUS_2: 	"+2 jump",
-	PowerUpEnum.LIFE_PLUS_1: 	"+1 life",
-	PowerUpEnum.LIFE_PLUS_2: 	"+2 life",
+	PowerUpEnum.JUMP_PLUS_1: 	"+1 pulo",
+	PowerUpEnum.JUMP_PLUS_2: 	"+2 pulo",
+	PowerUpEnum.LIFE_PLUS_1: 	"+1 vida",
+	PowerUpEnum.LIFE_PLUS_2: 	"+2 vida",
 	PowerUpEnum.WALL_JUMP:		"+wall slide"
 }
 
