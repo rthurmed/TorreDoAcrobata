@@ -38,7 +38,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=6]
 resource_name = "4"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Scenes/4/Hand:rect_position")
@@ -53,7 +53,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 269 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=7]
 resource_name = "6"
 length = 3.0
 tracks/0/type = "value"
@@ -69,15 +69,15 @@ tracks/0/keys = {
 "values": [ Vector2( -18, 225 ), Vector2( 262, 225 ) ]
 }
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 10 )
 region = Rect2( 14, 16, 10, 8 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 10 )
 region = Rect2( 16, 0, 16, 8 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 10 )
 region = Rect2( 16, 8, 8, 8 )
 
@@ -223,12 +223,11 @@ __meta__ = {
 [node name="Player" type="AnimatedSprite" parent="Scenes/6"]
 position = Vector2( -18, 225 )
 frames = SubResource( 5 )
-frame = 1
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/4 = SubResource( 9 )
-anims/6 = SubResource( 10 )
+anims/4 = SubResource( 6 )
+anims/6 = SubResource( 7 )
 
 [node name="Instructions" type="Control" parent="."]
 anchor_left = 1.0
@@ -253,7 +252,7 @@ __meta__ = {
 [node name="InputSkip" type="TextureRect" parent="Instructions/GridContainer"]
 margin_right = 10.0
 margin_bottom = 8.0
-texture = SubResource( 6 )
+texture = SubResource( 8 )
 
 [node name="LabelSkip" type="Label" parent="Instructions/GridContainer"]
 margin_left = 14.0
@@ -293,13 +292,13 @@ margin_bottom = 8.0
 [node name="InputNext2" type="TextureRect" parent="Instructions2/GridContainer/HBoxContainer"]
 margin_right = 16.0
 margin_bottom = 8.0
-texture = SubResource( 8 )
+texture = SubResource( 9 )
 
 [node name="InputNext" type="TextureRect" parent="Instructions2/GridContainer/HBoxContainer"]
 margin_left = 20.0
 margin_right = 28.0
 margin_bottom = 8.0
-texture = SubResource( 7 )
+texture = SubResource( 10 )
 
 [node name="LabelNext" type="Label" parent="Instructions2/GridContainer"]
 margin_left = 32.0

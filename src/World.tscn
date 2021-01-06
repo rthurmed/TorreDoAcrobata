@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://assets/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=2]
@@ -19,36 +19,39 @@
 [ext_resource path="res://assets/chest-Sheet.png" type="Texture" id=17]
 [ext_resource path="res://assets/coin-Sheet.png" type="Texture" id=18]
 [ext_resource path="res://assets/font/Kemco Pixel Bold.ttf" type="DynamicFontData" id=19]
+[ext_resource path="res://assets/doorway.png" type="Texture" id=20]
+[ext_resource path="res://assets/tortch_animation.tres" type="SpriteFrames" id=21]
+[ext_resource path="res://assets/window.png" type="Texture" id=22]
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 16 )
 region = Rect2( 0, 154, 511, 266 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 15 )
 region = Rect2( -3.944, 133, 129, 96 )
 
-[sub_resource type="Curve2D" id=1]
+[sub_resource type="Curve2D" id=3]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -190, -543, 0, 0, 0, 0, -32, -543, 0, 0, 0, 0, -190, -543 )
 }
 
-[sub_resource type="Curve2D" id=2]
+[sub_resource type="Curve2D" id=4]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -160, -785, 0, 0, 0, 0, -160, -644, 0, 0, 0, 0, -160, -785 )
 }
 
-[sub_resource type="Curve2D" id=3]
+[sub_resource type="Curve2D" id=5]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -116, -1413, 0, 0, 0, 0, -116, -1173, 0, 0, 0, 0, -116, -1415 )
 }
 
-[sub_resource type="Curve2D" id=4]
+[sub_resource type="Curve2D" id=6]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -206, -2600, 0, 0, 0, 0, -17, -2600, 0, 0, 0, 0, -206, -2600 )
 }
 
-[sub_resource type="Curve2D" id=5]
+[sub_resource type="Curve2D" id=7]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -80, -3493, 0, 0, 0, 0, -31, -3493, 0, 0, 0, 0, -32, -3185, 0, 0, 0, 0, -80, -3185, 0, 0, 0, 0, -80, -3493, 0, 0, 0, 0, -80, -3493 )
 }
@@ -89,26 +92,26 @@ animations = [ {
 "speed": 8.0
 } ]
 
-[sub_resource type="CanvasItemMaterial" id=18]
+[sub_resource type="CanvasItemMaterial" id=16]
 particles_animation = true
 particles_anim_h_frames = 6
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
-[sub_resource type="Curve" id=19]
+[sub_resource type="Curve" id=17]
 max_value = 200.0
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 5.45454 ), -13.1006, 0.0, 0, 0 ]
 
-[sub_resource type="RectangleShape2D" id=20]
+[sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 25, 19 )
 
-[sub_resource type="DynamicFont" id=22]
+[sub_resource type="DynamicFont" id=19]
 size = 18
 outline_size = 1
 extra_spacing_char = 1
 font_data = ExtResource( 19 )
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=20]
 resource_name = "ending"
 length = 10.0
 tracks/0/type = "value"
@@ -159,7 +162,7 @@ motion_offset = Vector2( 0, -250 )
 
 [node name="SeaSprite" type="Sprite" parent="CanvasLayer/ParallaxBackground/SeaParallaxLayer"]
 position = Vector2( 1, 581 )
-texture = SubResource( 6 )
+texture = SubResource( 1 )
 
 [node name="LandParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
 position = Vector2( -128, -178 )
@@ -173,7 +176,7 @@ texture = ExtResource( 14 )
 [node name="Sprite2" type="Sprite" parent="CanvasLayer/ParallaxBackground/LandParallaxLayer"]
 visible = false
 position = Vector2( 230, 456 )
-texture = SubResource( 7 )
+texture = SubResource( 2 )
 
 [node name="FadeColorRect" type="ColorRect" parent="CanvasLayer"]
 modulate = Color( 1, 1, 1, 0 )
@@ -712,7 +715,7 @@ position = Vector2( -56, -3315 )
 [node name="MovingSpinblades" type="Node" parent="Navigation2D"]
 
 [node name="Path2D1" type="Path2D" parent="Navigation2D/MovingSpinblades"]
-curve = SubResource( 1 )
+curve = SubResource( 3 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Navigation2D/MovingSpinblades/Path2D1"]
 position = Vector2( -190, -543 )
@@ -723,7 +726,7 @@ rotate = false
 [node name="Spinblade" parent="Navigation2D/MovingSpinblades/Path2D1/PathFollow2D/Carrier" instance=ExtResource( 6 )]
 
 [node name="Path2D2" type="Path2D" parent="Navigation2D/MovingSpinblades"]
-curve = SubResource( 2 )
+curve = SubResource( 4 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Navigation2D/MovingSpinblades/Path2D2"]
 position = Vector2( -160, -785 )
@@ -734,7 +737,7 @@ rotate = false
 [node name="Spinblade" parent="Navigation2D/MovingSpinblades/Path2D2/PathFollow2D/Carrier" instance=ExtResource( 6 )]
 
 [node name="Path2D3" type="Path2D" parent="Navigation2D/MovingSpinblades"]
-curve = SubResource( 3 )
+curve = SubResource( 5 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Navigation2D/MovingSpinblades/Path2D3"]
 position = Vector2( -116, -1413 )
@@ -754,7 +757,7 @@ rotate = false
 [node name="Spinblade" parent="Navigation2D/MovingSpinblades/Path2D3/PathFollow2D2/Carrier" instance=ExtResource( 6 )]
 
 [node name="Path2D4" type="Path2D" parent="Navigation2D/MovingSpinblades"]
-curve = SubResource( 4 )
+curve = SubResource( 6 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Navigation2D/MovingSpinblades/Path2D4"]
 position = Vector2( -206, -2600 )
@@ -766,7 +769,7 @@ SPEED = 60.0
 [node name="Spinblade" parent="Navigation2D/MovingSpinblades/Path2D4/PathFollow2D/Carrier" instance=ExtResource( 6 )]
 
 [node name="Path2D5" type="Path2D" parent="Navigation2D/MovingSpinblades"]
-curve = SubResource( 5 )
+curve = SubResource( 7 )
 
 [node name="PathFollow2D1" type="PathFollow2D" parent="Navigation2D/MovingSpinblades/Path2D5"]
 position = Vector2( -80, -3307.39 )
@@ -847,7 +850,7 @@ position = Vector2( -192, -3265 )
 position = Vector2( -31, -3505 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( -188, -33 )
+position = Vector2( -174, -29 )
 z_index = 4
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -865,7 +868,129 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="StartingPoint" type="Node2D" parent="."]
-position = Vector2( -188, -33 )
+position = Vector2( -174, -29 )
+
+[node name="Decorations" type="Node" parent="."]
+
+[node name="Door" type="Sprite" parent="Decorations"]
+position = Vector2( -187, -32 )
+texture = ExtResource( 20 )
+
+[node name="Window" type="Sprite" parent="Decorations"]
+position = Vector2( -112, -3486 )
+texture = ExtResource( 22 )
+
+[node name="Torches" type="Node" parent="Decorations"]
+
+[node name="Torch1" type="AnimatedSprite" parent="Decorations/Torches"]
+position = Vector2( -137, -102 )
+frames = ExtResource( 21 )
+frame = 2
+playing = true
+
+[node name="Torch2" type="AnimatedSprite" parent="Decorations/Torches"]
+position = Vector2( -154, -293 )
+frames = ExtResource( 21 )
+frame = 2
+playing = true
+
+[node name="Torch3" type="AnimatedSprite" parent="Decorations/Torches"]
+position = Vector2( -72, -519 )
+frames = ExtResource( 21 )
+frame = 1
+playing = true
+
+[node name="Torch4" type="AnimatedSprite" parent="Decorations/Torches"]
+position = Vector2( -190, -607 )
+frames = ExtResource( 21 )
+playing = true
+
+[node name="Torch5" type="AnimatedSprite" parent="Decorations/Torches"]
+position = Vector2( -58, -708 )
+frames = ExtResource( 21 )
+frame = 3
+playing = true
+
+[node name="Torch6" type="AnimatedSprite" parent="Decorations/Torches"]
+position = Vector2( -40, -1058 )
+frames = ExtResource( 21 )
+frame = 2
+playing = true
+
+[node name="Torch7" type="AnimatedSprite" parent="Decorations/Torches"]
+position = Vector2( -184, -1058 )
+frames = ExtResource( 21 )
+frame = 1
+playing = true
+
+[node name="Torch8" type="AnimatedSprite" parent="Decorations/Torches"]
+position = Vector2( -168, -1282 )
+frames = ExtResource( 21 )
+frame = 1
+playing = true
+
+[node name="Torch9" type="AnimatedSprite" parent="Decorations/Torches"]
+position = Vector2( -39, -1507 )
+frames = ExtResource( 21 )
+playing = true
+
+[node name="Torch10" type="AnimatedSprite" parent="Decorations/Torches"]
+position = Vector2( -112, -1696 )
+frames = ExtResource( 21 )
+frame = 3
+playing = true
+
+[node name="Torch11" type="AnimatedSprite" parent="Decorations/Torches"]
+position = Vector2( -184, -1811 )
+frames = ExtResource( 21 )
+frame = 2
+playing = true
+
+[node name="Torch12" type="AnimatedSprite" parent="Decorations/Torches"]
+position = Vector2( -38, -1811 )
+frames = ExtResource( 21 )
+frame = 2
+playing = true
+
+[node name="Torch13" type="AnimatedSprite" parent="Decorations/Torches"]
+position = Vector2( -73, -1966 )
+frames = ExtResource( 21 )
+frame = 1
+playing = true
+
+[node name="Torch14" type="AnimatedSprite" parent="Decorations/Torches"]
+position = Vector2( -65, -2453 )
+frames = ExtResource( 21 )
+frame = 1
+playing = true
+
+[node name="Torch15" type="AnimatedSprite" parent="Decorations/Torches"]
+position = Vector2( -33, -2818 )
+frames = ExtResource( 21 )
+playing = true
+
+[node name="Torch16" type="AnimatedSprite" parent="Decorations/Torches"]
+position = Vector2( -114, -2864 )
+frames = ExtResource( 21 )
+playing = true
+
+[node name="Torch17" type="AnimatedSprite" parent="Decorations/Torches"]
+position = Vector2( -90, -3026 )
+frames = ExtResource( 21 )
+frame = 3
+playing = true
+
+[node name="Torch18" type="AnimatedSprite" parent="Decorations/Torches"]
+position = Vector2( -100, -3600 )
+frames = ExtResource( 21 )
+frame = 2
+playing = true
+
+[node name="Torch19" type="AnimatedSprite" parent="Decorations/Torches"]
+position = Vector2( -190, -3600 )
+frames = ExtResource( 21 )
+frame = 1
+playing = true
 
 [node name="Audio" type="Node" parent="."]
 
@@ -881,7 +1006,7 @@ position = Vector2( 35, -16 )
 frames = SubResource( 15 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="End"]
-material = SubResource( 18 )
+material = SubResource( 16 )
 position = Vector2( 46, -18 )
 z_index = 8
 emitting = false
@@ -898,11 +1023,11 @@ linear_accel = 35.21
 radial_accel = 61.97
 radial_accel_random = 1.0
 anim_speed = 1.0
-anim_speed_curve = SubResource( 19 )
+anim_speed_curve = SubResource( 17 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="End"]
 position = Vector2( 68, -19 )
-shape = SubResource( 20 )
+shape = SubResource( 18 )
 
 [node name="WinLabel" type="RichTextLabel" parent="End"]
 modulate = Color( 1, 1, 1, 0 )
@@ -912,7 +1037,7 @@ margin_right = 132.0
 margin_bottom = -22.0
 rect_clip_content = false
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 22 )
+custom_fonts/normal_font = SubResource( 19 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = true
 bbcode_text = "[center][wave][rainbow freq=0.3 sat=2 val=2]YOU WIN"
@@ -926,7 +1051,7 @@ __meta__ = {
 position = Vector2( 0, -3730 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/ending = SubResource( 21 )
+anims/ending = SubResource( 20 )
 [connection signal="body_entered" from="Navigation2D/Spinblades/Spinblade1" to="Navigation2D/Spinblades/Spinblade1" method="_on_Spinblade_body_entered"]
 [connection signal="cause_damage" from="Navigation2D/Spinblades/Spinblade1" to="Player" method="_on_Any_cause_damage"]
 [connection signal="body_entered" from="Navigation2D/Spinblades/Spinblade2" to="Navigation2D/Spinblades/Spinblade2" method="_on_Spinblade_body_entered"]
