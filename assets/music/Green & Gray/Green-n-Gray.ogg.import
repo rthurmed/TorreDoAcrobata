@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Green-n-Gray.ogg-55e4af2e46760bf43d775ccd8173c49e.oggstr"
+
+[deps]
+
+source_file="res://assets/music/Green & Gray/Green-n-Gray.ogg"
+dest_files=[ "res://.import/Green-n-Gray.ogg-55e4af2e46760bf43d775ccd8173c49e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -14,7 +14,7 @@ func _on_QuitButton_pressed():
 	get_tree().quit()
 
 func _on_PlayButton_pressed():
-	get_tree().change_scene("res://src/World.tscn")
+	get_tree().change_scene("res://src/Intro.tscn")
 
 func _on_ToggleMusicButton_pressed():
 	var music = not $"/root/SaveDataManager".music
