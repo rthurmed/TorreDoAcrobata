@@ -34,3 +34,18 @@ func _on_Fly_collected():
 
 func _on_Player_dead():
 	reset()
+
+func _on_End_body_entered(body):
+	if body.name == "Player":
+		$End/Chest.play("default")
+		$Player.locked_movement = true
+		$Player/AnimatedSprite.play("default")
+		$AnimationPlayer.play("ending")
+
+func _on_Chest_animation_finished():
+	$End/CPUParticles2D.emitting = true
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "ending":
+		$"/root/Soundtrack".stop()
+		get_tree().change_scene("res://src/StartMenu.tscn")

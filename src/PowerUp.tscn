@@ -19,22 +19,24 @@ region_rect = Rect2( 0, 0, 32, 32 )
 shape = SubResource( 1 )
 
 [node name="Text" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = -6.0
+margin_top = -6.0
+margin_right = 34.0
+margin_bottom = 34.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Text"]
 margin_left = -21.0
-margin_top = -19.0
+margin_top = -16.0
 margin_right = 34.0
-margin_bottom = -4.0
+margin_bottom = -1.0
 rect_clip_content = false
 custom_fonts/normal_font = ExtResource( 3 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = true
-bbcode_text = "[wave]wall jump"
+bbcode_text = "[center][wave]wall jump"
 text = "wall jump"
 scroll_active = false
 __meta__ = {

@@ -51,7 +51,7 @@ func update_sprite():
 	$Sprite.region_rect.position.x = code * 32
 
 func update_text():
-	$Text/RichTextLabel.bbcode_text = "[wave]" if wavy_text else ""
+	$Text/RichTextLabel.bbcode_text = "[wave][center]" if wavy_text else "[center]"
 	$Text/RichTextLabel.bbcode_text += PowerUpLabel[code]
 
 func _on_PowerUp_body_entered(body):

@@ -15,7 +15,7 @@ const SPEED = 7000
 const SPEED_ON_AIR = 7000
 const GRAVITY = 180
 const GRAVITY_SLIDE_DEFAULT = 90
-const GRAVITY_SLIDE_DIFF = 30
+const GRAVITY_SLIDE_DIFF = 45 # just has 2 wall jump power ups so if you get both you dont have any slide
 const JUMP_POWER = -300
 const LIFE_DEFAULT = 2
 const JUMP_DEFAULT_MAX_N = 1
@@ -49,6 +49,7 @@ var is_taking_damage = false
 var is_imune_to_damage = false
 var is_knockback_damage = false
 var is_alive = true
+var locked_movement = false
 
 var is_interacting_with_holder = false
 var power_up_holder = null
@@ -78,9 +79,16 @@ func _physics_process(delta):
 	if not is_knockback_damage:
 		process_input(delta)
 	
+	if locked_movement:
+		movement = Vector2.ZERO
+		is_holding_jump = false
+	
 	process_actions(delta)
 	process_movement(delta)
-	process_animation(delta)
+	
+	if not locked_movement:
+		process_animation(delta)
+	
 	process_audio(delta)
 	
 	if is_onground:
