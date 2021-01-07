@@ -14,6 +14,7 @@ enum PowerUpEnum {
 const SPEED = 7000
 const SPEED_ON_AIR = 7000
 const GRAVITY = 180
+const GRAVITY_MIN = 120
 const GRAVITY_SLIDE_DEFAULT = 90
 const GRAVITY_SLIDE_DIFF = 45 # just has 2 wall jump power ups so if you get both you dont have any slide
 const JUMP_POWER = -300
@@ -60,6 +61,10 @@ var power_ups = [-1, -1, -1]
 var is_godmode_enabled = false
 var waiting_hurt_sound = false
 var is_on_min_hold_jump_time = false
+var just_released_jump = false
+var applied_gravity = GRAVITY_MIN
+var was_on_ground = false
+var is_starting_to_fall = false
 
 func _ready():
 	update_life_ui()
@@ -70,8 +75,10 @@ func _physics_process(delta):
 	
 	has_started_jump = false
 	
+	was_on_ground = is_onground
 	is_onground = is_on_floor()
 	is_onceiling = is_on_ceiling()
+	is_starting_to_fall = is_onground == false and was_on_ground == true
 	
 	is_able_to_jump = is_onground or timesjumped < max_n_jumps
 	
@@ -115,6 +122,7 @@ func process_input(_delta):
 	
 	if Input.is_action_just_released("jump"):
 		is_holding_jump = false
+		just_released_jump = true
 	
 	# Slots
 	selected_slot = null
@@ -181,7 +189,11 @@ func process_movement(delta):
 			velocity.y = gravity_slide
 			timesjumped = 0
 		else:
-			velocity.y = GRAVITY
+			if just_released_jump or is_starting_to_fall:
+				applied_gravity = GRAVITY_MIN
+				just_released_jump = false
+			applied_gravity = lerp(applied_gravity, GRAVITY, 5 * delta)
+			velocity.y = applied_gravity
 	
 	# warning-ignore:return_value_discarded
 	var snap = Vector2.DOWN * 8 if not is_holding_jump else Vector2.ZERO
