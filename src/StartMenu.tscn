@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/font/menu_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://src/StartMenu.gd" type="Script" id=2]
@@ -11,6 +11,13 @@
 [sub_resource type="DynamicFont" id=1]
 size = 12
 outline_size = 1
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 36
+outline_size = 2
+extra_spacing_bottom = 3
+extra_spacing_char = 3
 font_data = ExtResource( 3 )
 
 [node name="StartMenu" type="Control"]
@@ -66,6 +73,7 @@ margin_bottom = 5.0
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_bottom = 1.0
+margin_top = 105.0
 margin_right = 290.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -73,9 +81,9 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 12.0
-margin_top = 87.0
+margin_top = 34.0
 margin_right = 278.0
-margin_bottom = 183.0
+margin_bottom = 130.0
 
 [node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_right = 266.0
@@ -145,6 +153,24 @@ custom_fonts/normal_font = SubResource( 1 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_text = "Criado por RTHURMED para a Game Jaaj V"
 text = "Criado por RTHURMED para a Game Jaaj V"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="RichTextLabel" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -217.0
+margin_right = 310.0
+margin_bottom = -167.0
+rect_clip_content = false
+custom_fonts/normal_font = SubResource( 2 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Torre do acrobata"
+text = "Torre do acrobata"
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
