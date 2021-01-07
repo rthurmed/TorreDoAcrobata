@@ -59,6 +59,7 @@ var power_ups = [-1, -1, -1]
 
 var is_godmode_enabled = false
 var waiting_hurt_sound = false
+var is_on_min_hold_jump_time = false
 
 func _ready():
 	update_life_ui()
@@ -109,6 +110,8 @@ func process_input(_delta):
 	if Input.is_action_just_pressed("jump") and is_able_to_jump:
 		is_starting_jump = true
 		is_holding_jump = true
+		is_on_min_hold_jump_time = true
+		$Timer/JumpMinHoldTimer.start()
 	
 	if Input.is_action_just_released("jump"):
 		is_holding_jump = false
@@ -162,6 +165,7 @@ func process_movement(delta):
 	
 	if is_onceiling:
 		is_holding_jump = false
+		is_on_min_hold_jump_time = false
 	
 	if is_able_to_jump and is_starting_jump:
 		$Timer/JumpMaxHoldTimer.start()
@@ -171,7 +175,7 @@ func process_movement(delta):
 		has_started_jump = true
 	
 	if not is_onground:
-		if is_holding_jump:
+		if is_holding_jump or is_on_min_hold_jump_time:
 			velocity.y = lerp(velocity.y, 0, 5 * delta)
 		elif is_wall_sliding:
 			velocity.y = gravity_slide
@@ -316,3 +320,6 @@ func _on_PowerUp_stop_interacting_with_holder():
 	is_interacting_with_holder = false
 	power_up_holder = null
 	$PlayerUI.set_key_indicators(false)
+
+func _on_JumpMinHoldTimer_timeout():
+	is_on_min_hold_jump_time = false
