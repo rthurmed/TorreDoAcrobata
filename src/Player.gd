@@ -13,7 +13,7 @@ enum PowerUpEnum {
 
 const SPEED = 7000
 const SPEED_ON_AIR = 7000
-const GRAVITY = 180
+const GRAVITY = 240
 const GRAVITY_MIN = 120
 const GRAVITY_SLIDE_DEFAULT = 90
 const GRAVITY_SLIDE_DIFF = 45 # just has 2 wall jump power ups so if you get both you dont have any slide
@@ -206,7 +206,7 @@ func process_movement(delta):
 func process_animation(_delta):
 	var animate = "default"
 	
-	if is_holding_jump:
+	if is_holding_jump or is_on_min_hold_jump_time:
 		animate = "jump"
 	elif is_wall_sliding:
 		animate = "slide"
