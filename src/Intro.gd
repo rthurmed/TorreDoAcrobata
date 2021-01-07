@@ -11,7 +11,7 @@ func _process(_delta):
 	if Input.is_action_just_released("pause"):
 		# warning-ignore:return_value_discarded
 		get_tree().change_scene("res://src/World.tscn")
-	if Input.is_action_just_released("jump"):
+	if Input.is_action_just_pressed("jump"):
 		change_slide(slide + 1)
 		$SceneTimer.start()
 
